@@ -12,7 +12,7 @@ import { profile } from "../data";
 
 export default function AboutSkills() {
   return (
-    <section className="container-page grid gap-5 pt-10 lg:grid-cols-[.9fr_1.1fr]">
+    <section className="container-page grid gap-5 lg:grid-cols-[.9fr_1.1fr]">
       {/* About Me */}
       <div id="about" className="section-card p-6 sm:p-7">
         <SectionTitle
@@ -88,7 +88,7 @@ export default function AboutSkills() {
           title="Technical Expertise"
         />
 
-        <p className="mt-3 max-w-xl text-xs leading-6 text-slate-500">
+        <p className="mt-3 max-w-xl text-xs leading-6 text-slate-600 dark:text-slate-400">
           Technologies and tools I use to design, develop and maintain
           scalable web applications.
         </p>
@@ -150,7 +150,7 @@ export default function AboutSkills() {
         <div className="mt-5 rounded-xl border border-cyan-200 bg-cyan-50/50 p-4 dark:border-cyan/10 dark:bg-cyan/[0.025]">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-[10px] uppercase tracking-[0.18em] text-slate-500">
+              <p className="text-[10px] uppercase tracking-[0.18em] text-slate-600 dark:text-slate-400">
                 Frontend Engineering
               </p>
 
@@ -164,7 +164,7 @@ export default function AboutSkills() {
                 {profile.experience}
               </div>
 
-              <div className="text-[9px] text-slate-500">
+              <div className="text-[9px] text-slate-600 dark:text-slate-400">
                 Years Experience
               </div>
             </div>
@@ -190,7 +190,7 @@ function Info({ icon, label, value }) {
       <span className="mt-0.5 text-cyan-600/70 dark:text-cyan/70">{icon}</span>
 
       <div>
-        <div className="text-[10px] text-slate-500">
+        <div className="text-[10px] text-slate-600 dark:text-slate-400">
           {label}
         </div>
 

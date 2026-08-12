@@ -17,43 +17,35 @@ npm run build
 
 ## Main customization
 
-- `src/data.js` — name, role, skills, projects and stats
-- `src/components/Hero.jsx` — hero copy and profile image area
+- `src/data.js` — profile, tech stack, about, expertise, projects, experience, process, testimonials
+- `src/components/Hero.jsx` — hero copy, portrait and floating elements
 - `src/components/Contact.jsx` — email/phone/location and form
-- `public/` — profile photo and CV (placeholder files are included so nothing 404s)
+- `public/` — profile photo and CV
 
 ### Add your photo
 
-The hero already renders `public/profile.jpeg`, which now holds your real photo:
-
-```jsx
-<img
-  src="/profile.jpeg"
-  alt={profile.name}
-  className="absolute inset-0 h-full w-full object-cover object-top"
-/>
-```
-
-The frame is a tall portrait (305×425), so a square photo is cropped left/right
-to fill it. Use a headshot where you're centered, or swap `object-cover` for
-`object-contain` to show the whole photo (with empty space top/bottom).
+The hero renders `src/data.js` → `profile.photo` (currently `public/profile1.png`).
+Drop a new portrait into `public/` and update that path. The frame uses
+`object-cover object-top`, so use a headshot where you're centered.
 
 ### Add your CV
 
-A placeholder PDF is already at:
+The Download CV button links to `profile.resume` (`public/Rohit-Verma-Resume.pdf`).
+Replace the file with your real resume.
 
-`public/Rohit-Verma-Resume.pdf`
+### Fill in your details
 
-The Download CV button points to that path. Replace the file with your real resume.
+- `experience` in `src/data.js` — replace the placeholder company names with your real employers.
+- `testimonials` in `src/data.js` — replace placeholder names/roles with real client feedback.
+- `profile.email` and `profile.phone` — currently placeholders.
 
 ## Design
 
-- Dark navy background
-- Cyan/blue glow accents
-- Glassmorphism cards
-- Responsive mobile navigation
-- Hero, About, Skills, Projects, Process, Testimonials and Contact sections
-- No external image dependency
+- Premium dark developer portfolio (light mode included)
+- Near-black/navy background with subtle cyan gradients
+- Restrained glassmorphism, large typography, generous whitespace
+- Sections: Hero, About, Expertise, Projects, Experience, Process, Testimonials, Contact
+- Subtle animations: scroll reveal, hero load, portrait float, cursor spotlight, project hover zoom
 
 
 ## Supabase Contact Form

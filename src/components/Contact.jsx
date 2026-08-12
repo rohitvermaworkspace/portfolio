@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { Mail, MapPin, Phone, Send, Clock3, CheckCircle2, AlertCircle } from "lucide-react";
-import { supabase } from "../lib/supabase";
+import { AlertCircle, ArrowRight, CheckCircle2, Github, Linkedin, Mail, Send } from "lucide-react";
+import { profile } from "../data";
+import Reveal from "./Reveal";
 
 const initialForm = {
   name: "",
@@ -8,6 +9,12 @@ const initialForm = {
   subject: "",
   message: "",
 };
+
+const socials = [
+  { icon: Mail, label: "Email", href: `mailto:${profile.email}` },
+  { icon: Linkedin, label: "LinkedIn", href: "#" },
+  { icon: Github, label: "GitHub", href: "#" },
+];
 
 export default function Contact() {
   const [form, setForm] = useState(initialForm);
@@ -19,7 +26,6 @@ export default function Contact() {
       ...current,
       [event.target.name]: event.target.value,
     }));
-
     if (status !== "idle") {
       setStatus("idle");
       setError("");
@@ -49,6 +55,8 @@ export default function Contact() {
       return;
     }
 
+    const { supabase } = await import("../lib/supabase");
+
     const { error: insertError } = await supabase
       .from("contact_messages")
       .insert([payload]);
@@ -65,125 +73,112 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="container-page py-20">
-      <div className="section-card overflow-hidden p-6 sm:p-8">
-        <div className="grid gap-10 lg:grid-cols-[.9fr_1.1fr]">
-          <div>
-            <p className="eyebrow">
-              <Send size={13} /> Let's Build Something Great
-            </p>
+    <section id="contact" className="relative py-20 lg:py-28">
+      <div className="container-page">
+        <div className="grid gap-14 lg:grid-cols-2 lg:gap-20">
+          <Reveal>
+            <div>
+              <p className="eyebrow">Contact</p>
+              <h2 className="section-heading mt-4">
+                Have a project in mind?
+              </h2>
+              <p className="section-sub">
+                Let's build something great together. I'm always open to
+                discussing interesting products, frontend architecture, UI
+                engineering and new opportunities.
+              </p>
 
-            <h2 className="mt-5 max-w-md text-3xl font-bold text-slate-900 dark:text-slate-50">
-              Have a project in mind?
-            </h2>
+              <a href={`mailto:${profile.email}`} className="btn-primary mt-9">
+                Let's Talk <ArrowRight size={16} />
+              </a>
 
-            <p className="mt-3 max-w-md text-sm leading-6 text-slate-600 dark:text-slate-400">
-              Let's discuss your product, frontend architecture or UI
-              development needs.
-            </p>
-
-            <div className="mt-7 space-y-4 text-xs">
-              <ContactInfo
-                icon={<Mail size={15} />}
-                label="Email"
-                value="hello@rohitverma.dev"
-              />
-              <ContactInfo
-                icon={<Phone size={15} />}
-                label="Phone"
-                value="+91 00000 00000"
-              />
-              <ContactInfo
-                icon={<MapPin size={15} />}
-                label="Location"
-                value="India"
-              />
-              <ContactInfo
-                icon={<Clock3 size={15} />}
-                label="Availability"
-                value="Open to new opportunities"
-              />
+              <div className="mt-12 flex flex-wrap gap-x-10 gap-y-5">
+                {socials.map((social) => {
+                  const Icon = social.icon;
+                  return (
+                    <a
+                      key={social.label}
+                      href={social.href}
+                      className="group flex items-center gap-2.5 text-sm font-medium text-slate-600 transition hover:text-cyan-600 dark:text-slate-400 dark:hover:text-cyan"
+                    >
+                      <Icon size={17} className="transition-transform group-hover:-translate-y-0.5" />
+                      {social.label}
+                    </a>
+                  );
+                })}
+              </div>
             </div>
-          </div>
+          </Reveal>
 
-          <form className="grid gap-3" onSubmit={handleSubmit}>
-            <div className="grid gap-3 sm:grid-cols-2">
+          <Reveal delay={120}>
+            <form onSubmit={handleSubmit} className="flex flex-col gap-4" noValidate>
+              <div className="grid gap-4 sm:grid-cols-2">
+                <input
+                  className="field"
+                  name="name"
+                  value={form.name}
+                  onChange={handleChange}
+                  placeholder="Your Name"
+                  autoComplete="name"
+                  required
+                />
+                <input
+                  className="field"
+                  name="email"
+                  type="email"
+                  value={form.email}
+                  onChange={handleChange}
+                  placeholder="Your Email"
+                  autoComplete="email"
+                  required
+                />
+              </div>
+
               <input
                 className="field"
-                name="name"
-                value={form.name}
+                name="subject"
+                value={form.subject}
                 onChange={handleChange}
-                placeholder="Your Name"
-                autoComplete="name"
+                placeholder="Subject"
                 required
               />
-              <input
-                className="field"
-                name="email"
-                type="email"
-                value={form.email}
+
+              <textarea
+                className="field min-h-[140px] resize-none"
+                name="message"
+                value={form.message}
                 onChange={handleChange}
-                placeholder="Your Email"
-                autoComplete="email"
+                placeholder="Your Message"
+                minLength={10}
                 required
               />
-            </div>
 
-            <input
-              className="field"
-              name="subject"
-              value={form.subject}
-              onChange={handleChange}
-              placeholder="Subject"
-              required
-            />
+              {status === "success" && (
+                <div className="flex items-center gap-2.5 rounded-2xl border border-emerald-500/25 bg-emerald-500/10 px-5 py-3.5 text-sm text-emerald-600 dark:text-emerald-400">
+                  <CheckCircle2 size={17} />
+                  Thanks! Your message has been sent successfully.
+                </div>
+              )}
 
-            <textarea
-              className="field min-h-36 resize-none"
-              name="message"
-              value={form.message}
-              onChange={handleChange}
-              placeholder="Your Message"
-              minLength={10}
-              required
-            />
+              {status === "error" && (
+                <div className="flex items-center gap-2.5 rounded-2xl border border-red-500/25 bg-red-500/10 px-5 py-3.5 text-sm text-red-500 dark:text-red-400">
+                  <AlertCircle size={17} />
+                  {error}
+                </div>
+              )}
 
-            {status === "success" && (
-              <div className="flex items-center gap-2 rounded-xl border border-cyan-300 bg-cyan-50 px-4 py-3 text-xs text-cyan-700 dark:border-cyan/20 dark:bg-cyan/5 dark:text-cyan">
-                <CheckCircle2 size={15} />
-                Thanks! Your message has been sent successfully.
-              </div>
-            )}
-
-            {status === "error" && (
-              <div className="flex items-center gap-2 rounded-xl border border-red-400/20 bg-red-400/5 px-4 py-3 text-xs text-red-500 dark:text-red-300">
-                <AlertCircle size={15} />
-                {error}
-              </div>
-            )}
-
-            <button
-              disabled={status === "submitting"}
-              className="mt-1 inline-flex items-center justify-center gap-2 rounded-xl bg-cyan px-5 py-3 text-sm font-semibold text-slate-950 shadow-cyan transition hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-60"
-            >
-              {status === "submitting" ? "Sending..." : "Send Message"}
-              <Send size={15} />
-            </button>
-          </form>
+              <button
+                type="submit"
+                disabled={status === "submitting"}
+                className="btn-primary mt-2 disabled:cursor-not-allowed disabled:opacity-60"
+              >
+                {status === "submitting" ? "Sending..." : "Send Message"}
+                <Send size={15} />
+              </button>
+            </form>
+          </Reveal>
         </div>
       </div>
     </section>
-  );
-}
-
-function ContactInfo({ icon, label, value }) {
-  return (
-    <div className="flex items-center gap-3">
-      <span className="text-cyan-600 dark:text-cyan">{icon}</span>
-      <div>
-        <div className="text-[10px] text-slate-500">{label}</div>
-        <div className="mt-0.5 text-slate-800 dark:text-slate-300">{value}</div>
-      </div>
-    </div>
   );
 }

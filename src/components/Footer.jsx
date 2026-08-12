@@ -3,18 +3,51 @@ import { profile } from "../data";
 
 export default function Footer() {
   return (
-    <footer className="border-t border-slate-200 dark:border-white/5">
-      <div className="container-page flex flex-col items-center justify-between gap-4 py-6 text-xs text-slate-500 sm:flex-row">
-        <a href="#home" className="flex items-center gap-3 font-semibold text-slate-800 dark:text-slate-200">
-          <span className="text-xl font-extrabold text-cyan-600 dark:text-cyan">RV</span>{profile.name}
-        </a>
-        <p>© {new Date().getFullYear()} {profile.name}. All rights reserved.</p>
-        <div className="flex items-center gap-3">
-          <a href="#" className="hover:text-cyan-600 dark:hover:text-cyan"><Github size={15}/></a>
-          <a href="#" className="hover:text-cyan-600 dark:hover:text-cyan"><Linkedin size={15}/></a>
-          <a href="mailto:hello@rohitverma.dev" className="hover:text-cyan-600 dark:hover:text-cyan"><Mail size={15}/></a>
-          <a href="#home" aria-label="Back to top" className="ml-2 rounded-full border border-cyan-300 p-2 text-cyan-600 hover:bg-cyan-50 dark:border-cyan/20 dark:text-cyan dark:hover:bg-cyan/10"><ArrowUp size={14}/></a>
+    <footer className="relative border-t border-slate-200/70 dark:border-white/[0.06]">
+      <div className="container-page flex flex-col items-center gap-6 py-10 text-center sm:flex-row sm:justify-between sm:text-left">
+        <div>
+          <div className="text-base font-bold text-slate-900 dark:text-white">
+            {profile.name}
+          </div>
+          <div className="mt-0.5 text-sm text-slate-500 dark:text-slate-400">
+            {profile.role}
+          </div>
         </div>
+
+        <div className="flex items-center gap-3">
+          <a
+            href="#"
+            aria-label="GitHub"
+            className="rounded-xl border border-slate-200 bg-white/60 p-2.5 text-slate-500 transition hover:border-cyan-400/50 hover:text-cyan-600 dark:border-white/10 dark:bg-white/[0.03] dark:text-slate-400 dark:hover:text-cyan"
+          >
+            <Github size={16} />
+          </a>
+          <a
+            href="#"
+            aria-label="LinkedIn"
+            className="rounded-xl border border-slate-200 bg-white/60 p-2.5 text-slate-500 transition hover:border-cyan-400/50 hover:text-cyan-600 dark:border-white/10 dark:bg-white/[0.03] dark:text-slate-400 dark:hover:text-cyan"
+          >
+            <Linkedin size={16} />
+          </a>
+          <a
+            href={`mailto:${profile.email}`}
+            aria-label="Email"
+            className="rounded-xl border border-slate-200 bg-white/60 p-2.5 text-slate-500 transition hover:border-cyan-400/50 hover:text-cyan-600 dark:border-white/10 dark:bg-white/[0.03] dark:text-slate-400 dark:hover:text-cyan"
+          >
+            <Mail size={16} />
+          </a>
+          <a
+            href="#home"
+            aria-label="Back to top"
+            className="ml-2 rounded-xl border border-slate-200 bg-white/60 p-2.5 text-slate-500 transition hover:border-cyan-400/50 hover:text-cyan-600 dark:border-white/10 dark:bg-white/[0.03] dark:text-slate-400 dark:hover:text-cyan"
+          >
+            <ArrowUp size={16} />
+          </a>
+        </div>
+
+        <p className="text-xs text-slate-600 dark:text-slate-400">
+          © {new Date().getFullYear()} {profile.name}. All rights reserved.
+        </p>
       </div>
     </footer>
   );

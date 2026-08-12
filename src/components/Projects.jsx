@@ -1,38 +1,132 @@
-import { ArrowRight, ExternalLink, Layers3 } from "lucide-react";
+import { useEffect, useState } from "react";
+import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
 import { projects } from "../data";
+import ProjectVisual from "./ProjectVisual";
+import Reveal from "./Reveal";
+
+const AUTOPLAY_DELAY = 5000;
+const PER_VIEW = 3;
 
 export default function Projects() {
-  return (
-    <section id="projects" className="container-page pt-20">
-      <div className="mb-5 flex items-end justify-between gap-4">
-        <div>
-          <p className="eyebrow"><Layers3 size={13} /> Selected Work</p>
-          <h2 className="mt-3 text-2xl font-bold text-slate-900 dark:text-slate-50">Projects I'm proud of</h2>
-        </div>
-        <a href="#contact" className="hidden items-center gap-1 text-xs text-cyan-700 sm:flex dark:text-cyan">View All Projects <ArrowRight size={14} /></a>
-      </div>
+  const total = projects.length;
+  const [offset, setOffset] = useState(0);
 
-      <div className="grid gap-5 md:grid-cols-3">
-        {projects.map((project) => (
-          <article key={project.title} className="section-card overflow-hidden transition hover:-translate-y-1 hover:border-cyan-300 dark:hover:border-cyan/25">
-            <div className="relative h-40 overflow-hidden bg-gradient-to-br from-slate-100 via-blue-100/70 to-cyan-100 p-5 dark:from-slate-900 dark:via-blue-950/70 dark:to-cyan/10">
-              <div className="absolute inset-0 opacity-40 [background-image:linear-gradient(rgba(15,23,42,.05)_1px,transparent_1px),linear-gradient(90deg,rgba(15,23,42,.05)_1px,transparent_1px)] [background-size:20px_20px] dark:opacity-30 dark:[background-image:linear-gradient(rgba(255,255,255,.06)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.06)_1px,transparent_1px)]" />
-              <div className="relative rounded-xl border border-slate-200 bg-white/80 p-4 shadow-2xl dark:border-white/10 dark:bg-black/20">
-                <div className="mb-3 flex gap-1.5"><i className="h-2 w-2 rounded-full bg-red-400/70"/><i className="h-2 w-2 rounded-full bg-yellow-400/70"/><i className="h-2 w-2 rounded-full bg-green-400/70"/></div>
-                <div className="space-y-2"><div className="h-2 w-3/4 rounded bg-cyan-500/50 dark:bg-cyan/40"/><div className="h-2 w-1/2 rounded bg-slate-300 dark:bg-white/10"/><div className="h-8 rounded bg-slate-200 dark:bg-white/5"/></div>
-              </div>
-              <span className="absolute right-4 top-4 rounded-full border border-cyan-300 bg-cyan-50 px-2 py-1 text-[9px] text-cyan-700 dark:border-cyan/20 dark:bg-cyan/10 dark:text-cyan">{project.type}</span>
+  const go = (i) => setOffset(((i % total) + total) % total);
+  const prev = () => go(offset - 1);
+  const next = () => go(offset + 1);
+
+  useEffect(() => {
+    const id = setInterval(next, AUTOPLAY_DELAY);
+    return () => clearInterval(id);
+  }, [offset]);
+
+  const ordered = [...projects.slice(offset), ...projects.slice(0, offset)].slice(0, PER_VIEW);
+
+  return (
+    <section id="projects" className="relative py-10 lg:py-14">
+      <div className="container-page">
+        <Reveal>
+          <div className="flex flex-col lg:flex-row items-end justify-between gap-6">
+            <div>
+              <p className="eyebrow">Selected Work</p>
+              <h2 className="section-heading mt-4">Projects I'm proud of</h2>
+              <p className="section-sub">
+                A selection of products, platforms and interfaces I've helped
+                design and build.
+              </p>
             </div>
-            <div className="p-5">
-              <h3 className="font-semibold text-slate-900 dark:text-slate-100">{project.title}</h3>
-              <p className="mt-2 text-xs leading-6 text-slate-600 dark:text-slate-400">{project.description}</p>
-              <div className="mt-4 flex flex-wrap gap-1.5">
-                {project.tags.map(tag => <span key={tag} className="rounded-md border border-slate-200 bg-white px-2 py-1 text-[9px] text-slate-500 dark:border-white/10 dark:bg-white/[0.03] dark:text-slate-400">{tag}</span>)}
-              </div>
-              <a href="#contact" className="mt-5 inline-flex items-center gap-1 text-xs text-cyan-700 dark:text-cyan">Explore project <ExternalLink size={13} /></a>
+            <a href="#contact" className="btn-ghost hidden !text-[13px] sm:inline-flex">
+              View All Projects <ArrowRight size={15} />
+            </a>
+          </div>
+        </Reveal>
+
+        <Reveal delay={120}>
+          <div className="mt-10 lg:mt-14">
+            <div className="grid gap-6 lg:grid-cols-3">
+              {ordered.map((project, i) => {
+                return (
+                  <div
+                    key={project.title}
+                    className="group border rounded-2xl overflow-hidden p-6 transition-all duration-300 hover:border-cyan-500/40 hover:shadow-[0_10px_30px_-10px_rgba(11,120,255,0.15)] dark:border-white/[0.06] dark:hover:border-cyan/30"
+                  >
+                    <ProjectVisual gradient={project.gradient} title={project.title} />
+
+                    <div className="mt-4 pt-4 border-t border-slate-200/80">
+                      <div className="flex items-center gap-2 text-xs font-bold tracking-[0.15em] text-cyan-600 dark:text-cyan">
+                        <span>{i + 1}</span>
+                        <span className="h-px w-8 bg-cyan-500/40 dark:bg-cyan/40" />
+                        <span className="text-sm font-medium text-slate-900 dark:text-white">{project.category}</span>
+                      </div>
+
+                      <h3 className="mt-3 text-lg font-bold text-slate-900 dark:text-white">
+                        {project.title}
+                      </h3>
+
+                      <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">
+                        {project.description}
+                      </p>
+
+                      <div className="mt-3 flex flex-wrap gap-2">
+                        {project.tags.map((tag) => (
+                          <span key={tag} className="chip">
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+
+                      <a
+                        href="#contact"
+                        className="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-cyan-600 transition group/link hover:gap-3 dark:text-cyan"
+                      >
+                        View Project <ArrowUpRight size={16} className="transition-transform group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5" />
+                      </a>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
-          </article>
-        ))}
+
+            <div className="mt-12 flex items-center justify-center gap-6">
+              <button
+                onClick={prev}
+                aria-label="Previous projects"
+                className="rounded-xl border border-slate-200 bg-white/60 p-2.5 text-slate-600 transition hover:border-cyan-400/50 hover:text-cyan-600 dark:border-white/10 dark:bg-white/[0.03] dark:text-slate-300 dark:hover:text-cyan"
+              >
+                <ArrowLeft size={16} />
+              </button>
+
+              <div className="flex items-center gap-2.5">
+                {projects.map((project, i) => {
+                  const active = ordered.some((p) => p.title === project.title) && i === offset;
+                  const inView = ordered.some((p) => p.title === project.title);
+                  return (
+                    <button
+                      key={project.title}
+                      onClick={() => go(i)}
+                      aria-label={`Go to project ${i + 1}`}
+                      className={`h-2 rounded-full transition-all duration-300 ${
+                        active
+                          ? "w-8 bg-gradient-to-r from-cyan-500 to-sky-500 dark:from-cyan dark:to-sky-400"
+                          : inView
+                            ? "w-2 bg-cyan-400/60 dark:bg-cyan/40"
+                            : "w-2 bg-slate-300 hover:bg-cyan-400 dark:bg-white/15 dark:hover:bg-cyan/40"
+                      }`}
+                    />
+                  );
+                })}
+              </div>
+
+              <button
+                onClick={next}
+                aria-label="Next projects"
+                className="rounded-xl border border-slate-200 bg-white/60 p-2.5 text-slate-600 transition hover:border-cyan-400/50 hover:text-cyan-600 dark:border-white/10 dark:bg-white/[0.03] dark:text-slate-300 dark:hover:text-cyan"
+              >
+                <ArrowRight size={16} />
+              </button>
+            </div>
+          </div>
+        </Reveal>
       </div>
     </section>
   );

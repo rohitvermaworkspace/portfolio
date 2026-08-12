@@ -1,68 +1,105 @@
 import { useState } from "react";
-import { Menu, X, Download, Sun, Moon } from "lucide-react";
+import { Download, Menu, Moon, Sun, X } from "lucide-react";
 import { profile } from "../data";
 import { useTheme } from "../lib/useTheme";
+import { useActiveSection } from "../lib/useActiveSection";
 
 const links = [
   ["Home", "home"],
   ["About", "about"],
-  ["Skills", "skills"],
   ["Projects", "projects"],
-  ["Process", "process"],
-  ["Testimonials", "testimonials"],
+  ["Experience", "experience"],
   ["Contact", "contact"],
 ];
+
+const sectionIds = links.map(([, id]) => id);
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const { theme, toggleTheme } = useTheme();
+  const active = useActiveSection(sectionIds);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-slate-200 bg-white/80 backdrop-blur-xl dark:border-white/5 dark:bg-[#06101d]/80">
-      <div className="container-page flex h-16 items-center justify-between">
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-slate-200/60 bg-white/70 backdrop-blur-xl dark:border-white/5 dark:bg-[#05070d]/75">
+      <div className="container-page flex h-[72px] items-center justify-between gap-4">
         <a href="#home" className="flex items-center gap-3">
-          <span className="text-2xl font-extrabold tracking-tighter text-cyan-600 dark:text-cyan">RV</span>
-          <span className="hidden text-sm font-semibold text-slate-800 dark:text-slate-100 sm:block">{profile.name}</span>
+          <span className="gradient-text text-2xl font-extrabold tracking-tighter">RV</span>
+          <span className="hidden text-sm font-semibold text-slate-800 dark:text-slate-100 sm:block">
+            {profile.name}
+          </span>
         </a>
 
-        <nav className="hidden items-center gap-6 lg:flex">
-          {links.map(([label, id], index) => (
-            <a key={id} href={`#${id}`} className={`text-xs transition hover:text-cyan-600 dark:hover:text-cyan ${index === 0 ? "text-cyan-600 dark:text-cyan" : "text-slate-600 dark:text-slate-300"}`}>
-              {label}
-            </a>
-          ))}
+        <nav className="hidden items-center gap-7 lg:flex">
+          {links.map(([label, id]) => {
+            const isActive = active === id;
+            return (
+              <a
+                key={id}
+                href={`#${id}`}
+                className={`relative py-1 text-[13px] font-medium transition-colors ${
+                  isActive
+                    ? "text-cyan-600 dark:text-cyan"
+                    : "text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
+                }`}
+              >
+                {label}
+                {isActive && (
+                  <span className="absolute -bottom-[3px] left-1/2 h-[3px] w-[22px] -translate-x-1/2 rounded-full bg-gradient-to-r from-cyan-500 to-sky-500 dark:from-cyan dark:to-sky-400" />
+                )}
+              </a>
+            );
+          })}
         </nav>
 
-        <div className="hidden items-center gap-2 sm:flex">
-          <a href="/Rohit-Verma-Resume.pdf" className="flex items-center gap-2 rounded-full border border-slate-300 px-4 py-2 text-xs font-medium text-slate-700 hover:border-cyan-500 hover:text-cyan-600 dark:border-white/10 dark:text-slate-200 dark:hover:border-cyan/50 dark:hover:text-cyan">
-            <Download size={14} /> Download CV
+        <div className="flex items-center gap-2">
+          <a
+            href={profile.resume}
+            className="btn-primary hidden !px-4 !py-2.5 !text-[13px] sm:inline-flex"
+          >
+            <Download size={15} /> Download CV
           </a>
-          <button onClick={toggleTheme} aria-label="Toggle theme" className="rounded-full border border-slate-300 p-2 text-slate-700 hover:border-cyan-500 hover:text-cyan-600 dark:border-white/10 dark:text-slate-300 dark:hover:text-cyan">
-            {theme === "dark" ? <Sun size={15} /> : <Moon size={15} />}
+
+          <button
+            onClick={toggleTheme}
+            aria-label="Toggle theme"
+            className="rounded-xl border border-slate-200 bg-white/60 p-2.5 text-slate-600 transition hover:border-cyan-400/50 hover:text-cyan-600 dark:border-white/10 dark:bg-white/[0.03] dark:text-slate-300 dark:hover:text-cyan"
+          >
+            {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
+          </button>
+
+          <button
+            onClick={() => setOpen((v) => !v)}
+            aria-label="Toggle menu"
+            className="rounded-xl border border-slate-200 bg-white/60 p-2.5 text-slate-700 dark:border-white/10 dark:bg-white/[0.03] dark:text-slate-200 lg:hidden"
+          >
+            {open ? <X size={18} /> : <Menu size={18} />}
           </button>
         </div>
-
-        <button onClick={() => setOpen(!open)} className="rounded-lg border border-slate-300 p-2 text-slate-700 dark:border-white/10 dark:text-slate-300 lg:hidden">
-          {open ? <X size={20} /> : <Menu size={20} />}
-        </button>
       </div>
 
       {open && (
-        <div className="border-t border-slate-200 bg-white px-5 py-5 dark:border-white/10 dark:bg-[#071525] lg:hidden">
-          <div className="container-page flex flex-col gap-4">
+        <div className="border-t border-slate-200/60 bg-white/95 backdrop-blur-xl dark:border-white/5 dark:bg-[#060a12]/95 lg:hidden">
+          <div className="container-page flex flex-col gap-1 py-5">
             {links.map(([label, id]) => (
-              <a key={id} href={`#${id}`} onClick={() => setOpen(false)} className="text-sm text-slate-700 hover:text-cyan-600 dark:text-slate-200 dark:hover:text-cyan">
+              <a
+                key={id}
+                href={`#${id}`}
+                onClick={() => setOpen(false)}
+                className={`rounded-xl px-3 py-3 text-sm font-medium transition-colors ${
+                  active === id
+                    ? "bg-cyan-500/10 text-cyan-600 dark:text-cyan"
+                    : "text-slate-700 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-white/5"
+                }`}
+              >
                 {label}
               </a>
             ))}
-            <div className="mt-2 flex items-center gap-2">
-              <a href="/Rohit-Verma-Resume.pdf" className="flex w-fit items-center gap-2 rounded-full border border-cyan-300 px-4 py-2 text-xs text-cyan-700 dark:border-cyan/30 dark:text-cyan">
-                <Download size={14} /> Download CV
-              </a>
-              <button onClick={toggleTheme} aria-label="Toggle theme" className="rounded-full border border-slate-300 p-2 text-slate-700 dark:border-white/10 dark:text-slate-300">
-                {theme === "dark" ? <Sun size={15} /> : <Moon size={15} />}
-              </button>
-            </div>
+            <a
+              href={profile.resume}
+              className="btn-primary mt-3 !text-[13px]"
+            >
+              <Download size={15} /> Download CV
+            </a>
           </div>
         </div>
       )}
