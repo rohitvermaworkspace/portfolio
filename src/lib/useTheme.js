@@ -16,9 +16,7 @@ function getInitialMode() {
   } catch {
     /* ignore storage errors */
   }
-  return window.matchMedia("(prefers-color-scheme: light)").matches
-    ? "light"
-    : "dark";
+  return "dark";
 }
 
 export function useTheme() {

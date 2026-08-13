@@ -24,9 +24,7 @@
         try {
           var t = localStorage.getItem("rohit-portfolio-theme");
           if (t !== "light" && t !== "dark") {
-            t = window.matchMedia("(prefers-color-scheme: light)").matches
-              ? "light"
-              : "dark";
+            t = "dark";
           }
           document.documentElement.classList.add(t);
 
