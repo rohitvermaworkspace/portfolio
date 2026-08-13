@@ -77,8 +77,8 @@ export default function Hero() {
           <div className="absolute top-0 bottom-0 left-1/2 z-10 h-[390px] w-[270px] -translate-x-1/2 sm:h-[430px] sm:w-[430px]">
             <div className="animate-float relative h-full w-full overflow-hidden">
               <picture>
-                <source srcSet="/profile1.webp" type="image/webp" />
-                <img src="/profile1.png" fetchpriority="high" alt={profile.name} className="absolute inset-0 h-full w-full object-cover object-top" />
+                <source srcSet={`${import.meta.env.BASE_URL}profile1.webp`} type="image/webp" />
+                <img src={`${import.meta.env.BASE_URL}profile1.png`} fetchpriority="high" alt={profile.name} className="absolute inset-0 h-full w-full object-cover object-top" />
               </picture>
 
               <div className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-slate-950/60 via-slate-950/10 to-transparent" />
