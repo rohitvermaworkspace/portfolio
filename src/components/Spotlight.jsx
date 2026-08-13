@@ -7,12 +7,21 @@ export default function Spotlight() {
     const el = ref.current;
     if (!el) return;
 
+    let frame = 0;
+
     const handleMove = (event) => {
-      el.style.background = `radial-gradient(600px at ${event.clientX}px ${event.clientY}px, rgba(34,211,238,0.055), transparent 65%)`;
+      if (frame) return;
+      frame = requestAnimationFrame(() => {
+        el.style.background = `radial-gradient(600px at ${event.clientX}px ${event.clientY}px, rgba(34,211,238,0.055), transparent 65%)`;
+        frame = 0;
+      });
     };
 
     window.addEventListener("mousemove", handleMove);
-    return () => window.removeEventListener("mousemove", handleMove);
+    return () => {
+      window.removeEventListener("mousemove", handleMove);
+      if (frame) cancelAnimationFrame(frame);
+    };
   }, []);
 
   return (

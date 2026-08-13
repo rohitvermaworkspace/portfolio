@@ -8,7 +8,7 @@ import {
   Database,
   Palette,
 } from "lucide-react";
-import { profile } from "../data";
+import { about, profile } from "../data";
 
 export default function AboutSkills() {
   return (
@@ -21,36 +21,9 @@ export default function AboutSkills() {
         />
 
         <div className="mt-5 space-y-4 text-sm leading-7 text-slate-600 dark:text-slate-400">
-          <p>
-            I'm a <span className="font-medium text-slate-900 dark:text-slate-200">
-              Senior Frontend Developer
-            </span>{" "}
-            with 10+ years of experience building modern, scalable and
-            user-focused web applications.
-          </p>
-
-          <p>
-            My core expertise is in{" "}
-            <span className="font-medium text-cyan-700 dark:text-cyan">
-              Angular, React, TypeScript and JavaScript
-            </span>
-            , with strong experience in reusable component architecture,
-            design systems, responsive UI development and frontend performance
-            optimization.
-          </p>
-
-          <p>
-            Over the years, I've worked on enterprise applications, UI
-            modernization initiatives and full-stack projects, collaborating
-            with designers, backend developers, product teams and stakeholders
-            to deliver reliable digital experiences.
-          </p>
-
-          <p>
-            I enjoy solving complex frontend problems, improving application
-            architecture and helping teams build codebases that are easier to
-            maintain and scale.
-          </p>
+          {about.map((paragraph) => (
+            <Paragraph key={paragraph.text.slice(0, 24)} {...paragraph} />
+          ))}
         </div>
 
         {/* Personal Information */}
@@ -173,6 +146,32 @@ export default function AboutSkills() {
       </div>
     </section>
   );
+}
+
+function Paragraph({ text, strong }) {
+  const parts = strong.length
+    ? text.split(new RegExp(`(${strong.map(escapeRegex).join("|")})`))
+    : [text];
+
+  return (
+    <p>
+      {parts.map((part, i) =>
+        strong.includes(part) ? (
+          <span key={i} className="font-medium text-cyan-700 dark:text-cyan">
+            {part}
+          </span>
+        ) : (
+          <span key={i} className={part ? "text-slate-600 dark:text-slate-400" : ""}>
+            {part}
+          </span>
+        )
+      )}
+    </p>
+  );
+}
+
+function escapeRegex(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
 function SectionTitle({ icon, title }) {

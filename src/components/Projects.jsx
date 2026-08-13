@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
 import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
 import { projects } from "../data";
+import { useCarousel } from "../lib/useCarousel";
 import ProjectVisual from "./ProjectVisual";
 import Reveal from "./Reveal";
 
@@ -8,19 +8,11 @@ const AUTOPLAY_DELAY = 5000;
 const PER_VIEW = 3;
 
 export default function Projects() {
-  const total = projects.length;
-  const [offset, setOffset] = useState(0);
-
-  const go = (i) => setOffset(((i % total) + total) % total);
-  const prev = () => go(offset - 1);
-  const next = () => go(offset + 1);
-
-  useEffect(() => {
-    const id = setInterval(next, AUTOPLAY_DELAY);
-    return () => clearInterval(id);
-  }, [offset]);
-
-  const ordered = [...projects.slice(offset), ...projects.slice(0, offset)].slice(0, PER_VIEW);
+  const { offset, go, prev, next, ordered, setPaused } = useCarousel({
+    items: projects,
+    perView: PER_VIEW,
+    autoplay: AUTOPLAY_DELAY,
+  });
 
   return (
     <section id="projects" className="relative py-10 lg:py-14">
@@ -43,7 +35,11 @@ export default function Projects() {
 
         <Reveal delay={120}>
           <div className="mt-10 lg:mt-14">
-            <div className="grid gap-6 lg:grid-cols-3">
+            <div
+              className="grid gap-6 lg:grid-cols-3"
+              onMouseEnter={() => setPaused(true)}
+              onMouseLeave={() => setPaused(false)}
+            >
               {ordered.map((project, i) => {
                 return (
                   <div

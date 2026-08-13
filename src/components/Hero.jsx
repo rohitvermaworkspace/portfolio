@@ -6,7 +6,6 @@ import {
   Linkedin,
   Mail,
   ThumbsUp,
-  Twitter,
   Code2,
   Sparkles,
 } from "lucide-react";
@@ -48,12 +47,18 @@ export default function Hero() {
 
           <div className="mt-6 flex gap-2">
             {[
-              [Github, "GitHub"],
-              [Linkedin, "LinkedIn"],
-              [Twitter, "Twitter"],
-              [Mail, "Email"],
-            ].map(([Icon, label]) => (
-              <a key={label} href="#" aria-label={label} className="rounded-lg border border-slate-200 bg-white p-2 text-slate-500 transition hover:border-cyan-400 hover:text-cyan-600 dark:border-white/10 dark:bg-white/[.025] dark:text-slate-400 dark:hover:border-cyan/40 dark:hover:text-cyan">
+              [Github, "GitHub", profile.github],
+              [Linkedin, "LinkedIn", profile.linkedin],
+              [Mail, "Email", `mailto:${profile.email}`],
+            ].map(([Icon, label, href]) => (
+              <a
+                key={label}
+                href={href}
+                target={href.startsWith("http") ? "_blank" : undefined}
+                rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
+                aria-label={label}
+                className="rounded-lg border border-slate-200 bg-white p-2 text-slate-500 transition hover:border-cyan-400 hover:text-cyan-600 dark:border-white/10 dark:bg-white/[.025] dark:text-slate-400 dark:hover:border-cyan/40 dark:hover:text-cyan"
+              >
                 <Icon size={15} />
               </a>
             ))}
@@ -70,10 +75,10 @@ export default function Hero() {
 
           {/* Inner circle */}
           <div className="absolute top-0 bottom-0 left-1/2 z-10 h-[390px] w-[270px] -translate-x-1/2 sm:h-[430px] sm:w-[430px]">
-            <div className="animate-float relative h-full w-full overflow-hidden">
+            <div className="relative h-full w-full overflow-hidden">
               <picture>
                 <source srcSet="/profile1.webp" type="image/webp" />
-                <img src="/profile1.png" fetchpriority="high" alt={profile.name} className="absolute inset-0 h-full w-full object-cover object-top" />
+                <img src="/profile1.png" fetchPriority="high" alt={profile.name} className="absolute inset-0 h-full w-full object-cover object-top" />
               </picture>
 
               <div className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-slate-950/60 via-slate-950/10 to-transparent" />

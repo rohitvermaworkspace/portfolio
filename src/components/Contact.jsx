@@ -3,17 +3,22 @@ import { AlertCircle, ArrowRight, CheckCircle2, Github, Linkedin, Mail, Send } f
 import { profile } from "../data";
 import Reveal from "./Reveal";
 
+const supabaseReady = Boolean(
+  import.meta.env.VITE_SUPABASE_URL && import.meta.env.VITE_SUPABASE_ANON_KEY
+);
+
 const initialForm = {
   name: "",
   email: "",
   subject: "",
   message: "",
+  website: "",
 };
 
 const socials = [
   { icon: Mail, label: "Email", href: `mailto:${profile.email}` },
-  { icon: Linkedin, label: "LinkedIn", href: "#" },
-  { icon: Github, label: "GitHub", href: "#" },
+  { icon: Linkedin, label: "LinkedIn", href: profile.linkedin },
+  { icon: Github, label: "GitHub", href: profile.github },
 ];
 
 export default function Contact() {
@@ -44,6 +49,12 @@ export default function Contact() {
       message: form.message.trim(),
     };
 
+    if (form.website) {
+      setForm(initialForm);
+      setStatus("success");
+      return;
+    }
+
     if (
       payload.name.length < 2 ||
       payload.email.length < 5 ||
@@ -55,11 +66,15 @@ export default function Contact() {
       return;
     }
 
+    if (!supabaseReady) {
+      setStatus("error");
+      setError("Contact form is not configured yet. Please email me directly instead.");
+      return;
+    }
+
     const { supabase } = await import("../lib/supabase");
 
-    const { error: insertError } = await supabase
-      .from("contact_messages")
-      .insert([payload]);
+    const { error: insertError } = await supabase.from("contact_messages").insert([payload]);
 
     if (insertError) {
       console.error("Supabase contact form error:", insertError);
@@ -99,6 +114,8 @@ export default function Contact() {
                     <a
                       key={social.label}
                       href={social.href}
+                      target={social.href.startsWith("http") ? "_blank" : undefined}
+                      rel={social.href.startsWith("http") ? "noopener noreferrer" : undefined}
                       className="group flex items-center gap-2.5 text-sm font-medium text-slate-600 transition hover:text-cyan-600 dark:text-slate-400 dark:hover:text-cyan"
                     >
                       <Icon size={17} className="transition-transform group-hover:-translate-y-0.5" />
@@ -141,6 +158,18 @@ export default function Contact() {
                 onChange={handleChange}
                 placeholder="Subject"
                 required
+              />
+
+              <input
+                className="field min-h-[0px]"
+                style={{ position: "absolute", left: "-9999px", width: "1px", height: "1px", opacity: 0 }}
+                name="website"
+                value={form.website}
+                onChange={handleChange}
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+                placeholder="Leave this field empty"
               />
 
               <textarea

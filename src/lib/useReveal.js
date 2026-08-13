@@ -16,6 +16,14 @@ export function useReveal() {
       return;
     }
 
+    const onScroll = () => {
+      const r = el.getBoundingClientRect();
+      const vh = window.innerHeight || document.documentElement.clientHeight;
+      if (r.top < vh * 0.92 && r.bottom > 0) {
+        reveal();
+      }
+    };
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -30,20 +38,6 @@ export function useReveal() {
 
     observer.observe(el);
 
-    const fallbackTimer = setTimeout(() => {
-      if (!el.classList.contains("reveal-visible")) {
-        reveal();
-      }
-    }, 2500);
-
-    const onScroll = () => {
-      const r = el.getBoundingClientRect();
-      const vh = window.innerHeight || document.documentElement.clientHeight;
-      if (r.top < vh * 0.92 && r.bottom > 0) {
-        reveal();
-      }
-    };
-
     if (el.getBoundingClientRect().top < (window.innerHeight || 0)) {
       window.addEventListener("scroll", onScroll);
       window.addEventListener("resize", onScroll);
@@ -51,7 +45,6 @@ export function useReveal() {
 
     return () => {
       observer.disconnect();
-      clearTimeout(fallbackTimer);
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
     };

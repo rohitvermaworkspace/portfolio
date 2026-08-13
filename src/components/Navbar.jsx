@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Download, Menu, Moon, Sun, X } from "lucide-react";
 import { profile } from "../data";
 import { useTheme } from "../lib/useTheme";
@@ -18,6 +18,17 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
   const { theme, toggleTheme } = useTheme();
   const active = useActiveSection(sectionIds);
+
+  useEffect(() => {
+    if (!open) return;
+
+    const onKey = (event) => {
+      if (event.key === "Escape") setOpen(false);
+    };
+
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [open]);
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-slate-200/60 bg-white/70 backdrop-blur-xl dark:border-white/5 dark:bg-[#05070d]/75">
@@ -70,6 +81,8 @@ export default function Navbar() {
           <button
             onClick={() => setOpen((v) => !v)}
             aria-label="Toggle menu"
+            aria-expanded={open}
+            aria-controls="mobile-menu"
             className="rounded-xl border border-slate-200 bg-white/60 p-2.5 text-slate-700 dark:border-white/10 dark:bg-white/[0.03] dark:text-slate-200 lg:hidden"
           >
             {open ? <X size={18} /> : <Menu size={18} />}
@@ -78,7 +91,7 @@ export default function Navbar() {
       </div>
 
       {open && (
-        <div className="border-t border-slate-200/60 bg-white/95 backdrop-blur-xl dark:border-white/5 dark:bg-[#060a12]/95 lg:hidden">
+        <div id="mobile-menu" className="border-t border-slate-200/60 bg-white/95 backdrop-blur-xl dark:border-white/5 dark:bg-[#060a12]/95 lg:hidden">
           <div className="container-page flex flex-col gap-1 py-5">
             {links.map(([label, id]) => (
               <a

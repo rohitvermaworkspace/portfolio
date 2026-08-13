@@ -7,30 +7,30 @@ export const profile = {
   photo: "/profile1.png",
   resume: "/Rohit-Verma-Resume.pdf",
   email: "hello@rohitverma.dev",
-  phone: "+91 00000 00000",
   location: "India",
   availability: "Open to opportunities",
   experience: "10+",
+  github: "https://github.com/rohitvermaworkspace",
+  linkedin: "https://www.linkedin.com/in/rohit-verma-3bb60052/",
 };
 
-export const techStack = [
-  "Angular",
-  "React",
-  "TypeScript",
-  "JavaScript",
-  "Tailwind CSS",
-];
-
 export const about = [
-  "I'm a Senior Frontend Developer with 10+ years of experience building modern, scalable and user-focused web applications.",
-  "My core expertise is in Angular, React, TypeScript and JavaScript, with strong experience in reusable component architecture, design systems, responsive UI development and frontend performance optimization.",
-  "Over the years, I've worked on enterprise applications, UI modernization initiatives and full-stack projects, collaborating with designers, backend developers, product teams and stakeholders to deliver reliable digital experiences.",
-];
-
-export const highlights = [
-  { value: "10+", label: "Years Experience" },
-  { value: "30+", label: "Enterprise Applications" },
-  { value: "99%", label: "Client Satisfaction" },
+  {
+    text: "I'm a Senior Frontend Developer with 10+ years of experience building modern, scalable and user-focused web applications.",
+    strong: ["Senior Frontend Developer"],
+  },
+  {
+    text: "My core expertise is in Angular, React, TypeScript and JavaScript, with strong experience in reusable component architecture, design systems, responsive UI development and frontend performance optimization.",
+    strong: ["Angular, React, TypeScript and JavaScript"],
+  },
+  {
+    text: "Over the years, I've worked on enterprise applications, UI modernization initiatives and full-stack projects, collaborating with designers, backend developers, product teams and stakeholders to deliver reliable digital experiences.",
+    strong: [],
+  },
+  {
+    text: "I enjoy solving complex frontend problems, improving application architecture and helping teams build codebases that are easier to maintain and scale.",
+    strong: [],
+  },
 ];
 
 export const expertise = [

@@ -8,7 +8,11 @@ export default function Experience() {
         <Reveal>
           <div className="max-w-2xl">
             <p className="eyebrow">Career</p>
-            <h2 className="section-heading mt-4">Experience</h2>
+
+            <h2 className="section-heading mt-4">
+              Experience
+            </h2>
+
             <p className="section-sub">
               Over a decade building enterprise products and scalable frontend
               systems.
@@ -16,30 +20,79 @@ export default function Experience() {
           </div>
         </Reveal>
 
-        <div className="relative mt-16 max-w-3xl">
-          <div className="absolute left-[7px] top-1 bottom-1 w-px bg-gradient-to-b from-cyan-500/60 via-cyan-500/20 to-transparent dark:from-cyan/50 dark:via-cyan/20 sm:left-[9px]" />
+        {/* Timeline */}
+        <div className="relative mt-16">
 
-          <div className="flex flex-col gap-12">
+          {/* Central timeline */}
+          <div className="absolute left-4 top-0 bottom-0 hidden w-px bg-gradient-to-b from-cyan/60 via-cyan/20 to-transparent md:left-1/2 md:block md:-translate-x-1/2" />
+
+          <div className="space-y-10 md:space-y-0">
             {experience.map((item, i) => (
-              <Reveal key={i} delay={i * 90}>
-                <div className="relative pl-10 sm:pl-14">
-                  <span className="absolute left-0 top-1 flex h-[15px] w-[15px] items-center justify-center sm:h-[19px] sm:w-[19px]">
-                    <span className="absolute inset-0 rounded-full bg-cyan-500/25 dark:bg-cyan/20" />
-                    <span className="h-2 w-2 rounded-full bg-cyan-500 dark:bg-cyan" />
-                  </span>
+              <Reveal key={i} delay={i * 100}>
+                <div
+                  className={`relative flex flex-col md:min-h-[250px] md:flex-row ${
+                    i % 2 === 0
+                      ? "md:justify-start"
+                      : "md:justify-end"
+                  }`}
+                >
 
-                  <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-600 dark:text-slate-400">
-                    {item.period}
+                  {/* Timeline Node */}
+                  <div className="absolute left-[8px] top-8 z-20 hidden md:left-1/2 md:flex md:-translate-x-1/2">
+                    <span className="relative flex h-5 w-5 items-center justify-center">
+                      <span className="absolute inset-0 rounded-full bg-cyan/20 shadow-[0_0_20px_rgba(22,224,255,.25)]" />
+                      <span className="relative h-2.5 w-2.5 rounded-full bg-cyan shadow-[0_0_12px_rgba(22,224,255,.7)]" />
+                    </span>
                   </div>
-                  <h3 className="mt-2 text-xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-2xl">
-                    {item.role}
-                  </h3>
-                  <div className="mt-1 text-sm font-medium text-cyan-600 dark:text-cyan">
-                    {item.company}
+
+                  {/* Branch Line */}
+                  <div
+                    className={`absolute top-[42px] hidden h-px w-[8%] bg-gradient-to-r from-cyan/40 to-transparent md:block ${
+                      i % 2 === 0
+                        ? "left-[42%]"
+                        : "right-[42%] rotate-180"
+                    }`}
+                  />
+
+                  {/* Experience Card */}
+                  <div
+                    className={`relative w-full md:w-[43%] ${
+                      i % 2 === 0
+                        ? "md:mr-auto"
+                        : "md:ml-auto"
+                    }`}
+                  >
+                    <div className="group relative rounded-2xl border border-slate-200 bg-white/70 p-6 shadow-[0_15px_45px_rgba(15,23,42,.06)] backdrop-blur-sm transition duration-300 hover:-translate-y-1 hover:border-cyan-300 hover:shadow-[0_20px_50px_rgba(22,224,255,.10)] dark:border-white/10 dark:bg-white/[.025] dark:hover:border-cyan/30">
+
+                      {/* Card glow */}
+                      <div className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-br from-cyan/[.04] via-transparent to-transparent opacity-0 transition group-hover:opacity-100" />
+
+                      <div className="relative">
+
+                        {/* Period */}
+                        <div className="flex flex-wrap items-center gap-3">
+                          <span className="rounded-full border border-cyan-200 bg-cyan-50 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.15em] text-cyan-700 dark:border-cyan/20 dark:bg-cyan/[.06] dark:text-cyan">
+                            {item.period}
+                          </span>
+                        </div>
+
+                        {/* Role */}
+                        <h3 className="mt-4 text-xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-2xl">
+                          {item.role}
+                        </h3>
+
+                        {/* Company */}
+                        <div className="mt-1 text-sm font-semibold text-cyan-600 dark:text-cyan">
+                          {item.company}
+                        </div>
+
+                        {/* Description */}
+                        <p className="mt-4 text-[14px] leading-7 text-slate-600 dark:text-slate-400">
+                          {item.description}
+                        </p>
+                      </div>
+                    </div>
                   </div>
-                  <p className="mt-4 max-w-xl text-[15px] leading-7 text-slate-600 dark:text-slate-400">
-                    {item.description}
-                  </p>
                 </div>
               </Reveal>
             ))}
