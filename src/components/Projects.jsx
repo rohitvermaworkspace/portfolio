@@ -44,14 +44,14 @@ export default function Projects() {
                 return (
                   <div
                     key={project.title}
-                    className="group border rounded-2xl overflow-hidden p-6 transition-all duration-300 hover:border-cyan-500/40 hover:shadow-[0_10px_30px_-10px_rgba(11,120,255,0.15)] dark:border-white/[0.06] dark:hover:border-cyan/30"
+                    className="group border rounded-2xl overflow-hidden p-6 transition-all duration-300 hover:border-primary-500/40 hover:shadow-[0_10px_30px_-10px_rgb(var(--tertiary)_/_0.15)] dark:border-white/[0.06] dark:hover:border-primary/30"
                   >
                     <ProjectVisual gradient={project.gradient} title={project.title} />
 
                     <div className="mt-4 pt-4 border-t border-slate-200/80">
-                      <div className="flex items-center gap-2 text-xs font-bold tracking-[0.15em] text-cyan-600 dark:text-cyan">
+                      <div className="flex items-center gap-2 text-xs font-bold tracking-[0.15em] text-primary-600 dark:text-primary">
                         <span>{i + 1}</span>
-                        <span className="h-px w-8 bg-cyan-500/40 dark:bg-cyan/40" />
+                        <span className="h-px w-8 bg-primary-500/40 dark:bg-primary/40" />
                         <span className="text-sm font-medium text-slate-900 dark:text-white">{project.category}</span>
                       </div>
 
@@ -73,7 +73,7 @@ export default function Projects() {
 
                       <a
                         href="#contact"
-                        className="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-cyan-600 transition group/link hover:gap-3 dark:text-cyan"
+                        className="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-primary-600 transition group/link hover:gap-3 dark:text-primary"
                       >
                         View Project <ArrowUpRight size={16} className="transition-transform group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5" />
                       </a>
@@ -87,7 +87,7 @@ export default function Projects() {
               <button
                 onClick={prev}
                 aria-label="Previous projects"
-                className="rounded-xl border border-slate-200 bg-white/60 p-2.5 text-slate-600 transition hover:border-cyan-400/50 hover:text-cyan-600 dark:border-white/10 dark:bg-white/[0.03] dark:text-slate-300 dark:hover:text-cyan"
+                className="rounded-xl border border-slate-200 bg-white/60 p-2.5 text-slate-600 transition hover:border-primary-400/50 hover:text-primary-600 dark:border-white/10 dark:bg-white/[0.03] dark:text-slate-300 dark:hover:text-primary"
               >
                 <ArrowLeft size={16} />
               </button>
@@ -103,10 +103,10 @@ export default function Projects() {
                       aria-label={`Go to project ${i + 1}`}
                       className={`h-2 rounded-full transition-all duration-300 ${
                         active
-                          ? "w-8 bg-gradient-to-r from-cyan-500 to-sky-500 dark:from-cyan dark:to-sky-400"
+                          ? "w-8 bg-gradient-to-r from-primary-500 to-secondary-500 dark:from-primary dark:to-secondary-400"
                           : inView
-                            ? "w-2 bg-cyan-400/60 dark:bg-cyan/40"
-                            : "w-2 bg-slate-300 hover:bg-cyan-400 dark:bg-white/15 dark:hover:bg-cyan/40"
+                            ? "w-2 bg-primary-400/60 dark:bg-primary/40"
+                            : "w-2 bg-slate-300 hover:bg-primary-400 dark:bg-white/15 dark:hover:bg-primary/40"
                       }`}
                     />
                   );
@@ -116,7 +116,7 @@ export default function Projects() {
               <button
                 onClick={next}
                 aria-label="Next projects"
-                className="rounded-xl border border-slate-200 bg-white/60 p-2.5 text-slate-600 transition hover:border-cyan-400/50 hover:text-cyan-600 dark:border-white/10 dark:bg-white/[0.03] dark:text-slate-300 dark:hover:text-cyan"
+                className="rounded-xl border border-slate-200 bg-white/60 p-2.5 text-slate-600 transition hover:border-primary-400/50 hover:text-primary-600 dark:border-white/10 dark:bg-white/[0.03] dark:text-slate-300 dark:hover:text-primary"
               >
                 <ArrowRight size={16} />
               </button>

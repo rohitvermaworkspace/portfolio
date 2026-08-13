@@ -9,6 +9,7 @@ import {
   Palette,
 } from "lucide-react";
 import { about, profile } from "../data";
+import SkillIcon from "../lib/skillIcons";
 
 export default function AboutSkills() {
   return (
@@ -120,7 +121,7 @@ export default function AboutSkills() {
         </div>
 
         {/* Experience highlight */}
-        <div className="mt-5 rounded-xl border border-cyan-200 bg-cyan-50/50 p-4 dark:border-cyan/10 dark:bg-cyan/[0.025]">
+        <div className="mt-5 rounded-xl border border-primary-200 bg-primary-50/50 p-4 dark:border-primary/10 dark:bg-primary/[0.025]">
           <div className="flex items-center justify-between">
             <div>
               <p className="text-[10px] uppercase tracking-[0.18em] text-slate-600 dark:text-slate-400">
@@ -133,7 +134,7 @@ export default function AboutSkills() {
             </div>
 
             <div className="text-right">
-              <div className="text-xl font-bold text-cyan-700 dark:text-cyan">
+              <div className="text-xl font-bold text-primary-700 dark:text-primary">
                 {profile.experience}
               </div>
 
@@ -157,7 +158,7 @@ function Paragraph({ text, strong }) {
     <p>
       {parts.map((part, i) =>
         strong.includes(part) ? (
-          <span key={i} className="font-medium text-cyan-700 dark:text-cyan">
+          <span key={i} className="font-medium text-primary-700 dark:text-primary">
             {part}
           </span>
         ) : (
@@ -177,7 +178,7 @@ function escapeRegex(value) {
 function SectionTitle({ icon, title }) {
   return (
     <h2 className="flex items-center gap-2 text-sm font-semibold text-slate-900 dark:text-slate-100">
-      <span className="text-cyan-600 dark:text-cyan">{icon}</span>
+      <span className="text-primary-600 dark:text-primary">{icon}</span>
       {title}
     </h2>
   );
@@ -186,7 +187,7 @@ function SectionTitle({ icon, title }) {
 function Info({ icon, label, value }) {
   return (
     <div className="flex items-start gap-3">
-      <span className="mt-0.5 text-cyan-600/70 dark:text-cyan/70">{icon}</span>
+      <span className="mt-0.5 text-primary-600/70 dark:text-primary/70">{icon}</span>
 
       <div>
         <div className="text-[10px] text-slate-600 dark:text-slate-400">
@@ -203,9 +204,9 @@ function Info({ icon, label, value }) {
 
 function SkillGroup({ icon, title, skills }) {
   return (
-    <div className="rounded-xl border border-slate-200 bg-slate-50/60 p-4 transition hover:border-cyan-300 hover:bg-cyan-50/50 dark:border-white/5 dark:bg-white/[0.02] dark:hover:border-cyan/20 dark:hover:bg-cyan/[0.025]">
+    <div className="rounded-xl border border-slate-200 bg-slate-50/60 p-4 transition hover:border-primary-300 hover:bg-primary-50/50 dark:border-white/5 dark:bg-white/[0.02] dark:hover:border-primary/20 dark:hover:bg-primary/[0.025]">
       <div className="flex items-center gap-2">
-        <span className="text-cyan-600 dark:text-cyan">{icon}</span>
+        <span className="text-primary-600 dark:text-primary">{icon}</span>
 
         <h3 className="text-xs font-semibold text-slate-800 dark:text-slate-200">
           {title}
@@ -216,8 +217,9 @@ function SkillGroup({ icon, title, skills }) {
         {skills.map((skill) => (
           <span
             key={skill}
-            className="rounded-md border border-slate-200 bg-white px-2.5 py-1.5 text-[10px] text-slate-600 transition hover:border-cyan-400 hover:text-cyan-700 dark:border-white/10 dark:bg-white/[0.025] dark:text-slate-400 dark:hover:border-cyan/25 dark:hover:text-cyan"
+            className="inline-flex items-center gap-1.5 rounded-md border border-slate-200 bg-white px-2.5 py-1.5 text-[11px] text-slate-600 transition hover:border-primary-400 hover:text-primary-700 dark:border-white/10 dark:bg-white/[0.025] dark:text-slate-400 dark:hover:border-primary/25 dark:hover:text-primary"
           >
+            <SkillIcon name={skill} />
             {skill}
           </span>
         ))}

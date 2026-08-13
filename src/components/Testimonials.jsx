@@ -17,12 +17,12 @@ export default function Testimonials() {
           {testimonials.map((item, i) => (
             <Reveal key={item.role} delay={i * 100}>
               <figure className="flex h-full flex-col">
-                <Quote size={34} className="text-cyan-500/70 dark:text-cyan/60" fill="currentColor" strokeWidth={0} />
+                <Quote size={34} className="text-primary-500/70 dark:text-primary/60" fill="currentColor" strokeWidth={0} />
                 <blockquote className="mt-5 flex-1 text-[15px] leading-8 text-slate-700 dark:text-slate-300">
                   "{item.quote}"
                 </blockquote>
                 <figcaption className="mt-7 flex items-center gap-3 border-t border-slate-200/70 pt-6 dark:border-white/[0.06]">
-                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-cyan-500 to-sky-600 text-xs font-bold text-white">
+                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-primary-500 to-secondary-600 text-xs font-bold text-white">
                     {item.initials}
                   </span>
                   <div>

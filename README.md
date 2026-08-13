@@ -17,21 +17,22 @@ npm run build
 
 ## Main customization
 
-- `src/data.js` — profile, tech stack, about, expertise, projects, experience, process, testimonials
+- `src/data.js` — profile, about, expertise, projects, experience, process, testimonials
 - `src/components/Hero.jsx` — hero copy, portrait and floating elements
-- `src/components/Contact.jsx` — email/phone/location and form
+- `src/components/Contact.jsx` — email/location and form
 - `public/` — profile photo and CV
 
 ### Add your photo
 
-The hero renders `src/data.js` → `profile.photo` (currently `public/profile1.png`).
-Drop a new portrait into `public/` and update that path. The frame uses
+The hero renders `/profile1.webp` (with `/profile1.png` as fallback) directly in `src/components/Hero.jsx`.
+Drop a new portrait into `public/` and update those paths. The frame uses
 `object-cover object-top`, so use a headshot where you're centered.
 
 ### Add your CV
 
-The Download CV button links to `profile.resume` (`public/Rohit-Verma-Resume.pdf`).
-Replace the file with your real resume.
+The Download CV button links to `profile.resume` (`public/Resume.pdf`) and force-downloads the file.
+
+To use your own resume: drop it into `public/` (keeping the filename `Resume.pdf` or updating `profile.resume` in `src/data.js`).
 
 ### Fill in your details
 

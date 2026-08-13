@@ -20,7 +20,7 @@ export default function Footer() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="GitHub"
-            className="rounded-xl border border-slate-200 bg-white/60 p-2.5 text-slate-500 transition hover:border-cyan-400/50 hover:text-cyan-600 dark:border-white/10 dark:bg-white/[0.03] dark:text-slate-400 dark:hover:text-cyan"
+            className="rounded-xl border border-slate-200 bg-white/60 p-2.5 text-slate-500 transition hover:border-primary-400/50 hover:text-primary-600 dark:border-white/10 dark:bg-white/[0.03] dark:text-slate-400 dark:hover:text-primary"
           >
             <Github size={16} />
           </a>
@@ -29,21 +29,21 @@ export default function Footer() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="LinkedIn"
-            className="rounded-xl border border-slate-200 bg-white/60 p-2.5 text-slate-500 transition hover:border-cyan-400/50 hover:text-cyan-600 dark:border-white/10 dark:bg-white/[0.03] dark:text-slate-400 dark:hover:text-cyan"
+            className="rounded-xl border border-slate-200 bg-white/60 p-2.5 text-slate-500 transition hover:border-primary-400/50 hover:text-primary-600 dark:border-white/10 dark:bg-white/[0.03] dark:text-slate-400 dark:hover:text-primary"
           >
             <Linkedin size={16} />
           </a>
           <a
             href={`mailto:${profile.email}`}
             aria-label="Email"
-            className="rounded-xl border border-slate-200 bg-white/60 p-2.5 text-slate-500 transition hover:border-cyan-400/50 hover:text-cyan-600 dark:border-white/10 dark:bg-white/[0.03] dark:text-slate-400 dark:hover:text-cyan"
+            className="rounded-xl border border-slate-200 bg-white/60 p-2.5 text-slate-500 transition hover:border-primary-400/50 hover:text-primary-600 dark:border-white/10 dark:bg-white/[0.03] dark:text-slate-400 dark:hover:text-primary"
           >
             <Mail size={16} />
           </a>
           <a
             href="#home"
             aria-label="Back to top"
-            className="ml-2 rounded-xl border border-slate-200 bg-white/60 p-2.5 text-slate-500 transition hover:border-cyan-400/50 hover:text-cyan-600 dark:border-white/10 dark:bg-white/[0.03] dark:text-slate-400 dark:hover:text-cyan"
+            className="ml-2 rounded-xl border border-slate-200 bg-white/60 p-2.5 text-slate-500 transition hover:border-primary-400/50 hover:text-primary-600 dark:border-white/10 dark:bg-white/[0.03] dark:text-slate-400 dark:hover:text-primary"
           >
             <ArrowUp size={16} />
           </a>

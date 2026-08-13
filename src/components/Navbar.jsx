@@ -3,6 +3,7 @@ import { Download, Menu, Moon, Sun, X } from "lucide-react";
 import { profile } from "../data";
 import { useTheme } from "../lib/useTheme";
 import { useActiveSection } from "../lib/useActiveSection";
+import ThemeSwitcher from "./ThemeSwitcher";
 
 const links = [
   ["Home", "home"],
@@ -49,13 +50,13 @@ export default function Navbar() {
                 href={`#${id}`}
                 className={`relative py-1 text-[13px] font-medium transition-colors ${
                   isActive
-                    ? "text-cyan-600 dark:text-cyan"
+                    ? "text-primary-600 dark:text-primary"
                     : "text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
                 }`}
               >
                 {label}
                 {isActive && (
-                  <span className="absolute -bottom-[3px] left-1/2 h-[3px] w-[22px] -translate-x-1/2 rounded-full bg-gradient-to-r from-cyan-500 to-sky-500 dark:from-cyan dark:to-sky-400" />
+                  <span className="absolute -bottom-[3px] left-1/2 h-[3px] w-[22px] -translate-x-1/2 rounded-full bg-gradient-to-r from-primary-500 to-secondary-500 dark:from-primary dark:to-secondary-400" />
                 )}
               </a>
             );
@@ -65,15 +66,18 @@ export default function Navbar() {
         <div className="flex items-center gap-2">
           <a
             href={profile.resume}
+            download="Resume.pdf"
             className="btn-primary hidden !px-4 !py-2.5 !text-[13px] sm:inline-flex"
           >
             <Download size={15} /> Download CV
           </a>
 
+          <ThemeSwitcher />
+
           <button
             onClick={toggleTheme}
             aria-label="Toggle theme"
-            className="rounded-xl border border-slate-200 bg-white/60 p-2.5 text-slate-600 transition hover:border-cyan-400/50 hover:text-cyan-600 dark:border-white/10 dark:bg-white/[0.03] dark:text-slate-300 dark:hover:text-cyan"
+            className="rounded-xl border border-slate-200 bg-white/60 p-2.5 text-slate-600 transition hover:border-primary-400/50 hover:text-primary-600 dark:border-white/10 dark:bg-white/[0.03] dark:text-slate-300 dark:hover:text-primary"
           >
             {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
           </button>
@@ -100,7 +104,7 @@ export default function Navbar() {
                 onClick={() => setOpen(false)}
                 className={`rounded-xl px-3 py-3 text-sm font-medium transition-colors ${
                   active === id
-                    ? "bg-cyan-500/10 text-cyan-600 dark:text-cyan"
+                    ? "bg-primary-500/10 text-primary-600 dark:text-primary"
                     : "text-slate-700 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-white/5"
                 }`}
               >
@@ -109,6 +113,7 @@ export default function Navbar() {
             ))}
             <a
               href={profile.resume}
+              download="Resume.pdf"
               className="btn-primary mt-3 !text-[13px]"
             >
               <Download size={15} /> Download CV

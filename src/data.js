@@ -1,11 +1,7 @@
 export const profile = {
   name: "Rohit Verma",
-  initials: "RV",
   role: "Senior Frontend Developer",
-  tagline: "I build scalable digital experiences that matter.",
-  bio: "10+ years of experience in Angular, React, TypeScript and modern frontend architecture.",
-  photo: "/profile1.png",
-  resume: "/Rohit-Verma-Resume.pdf",
+  resume: "/Resume.pdf",
   email: "hello@rohitverma.dev",
   location: "India",
   availability: "Open to opportunities",

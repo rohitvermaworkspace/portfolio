@@ -29,6 +29,9 @@
               : "dark";
           }
           document.documentElement.classList.add(t);
+
+          var c = localStorage.getItem("rohit-portfolio-color-theme");
+          if (c) document.documentElement.setAttribute("data-theme", c);
         } catch (e) {
           document.documentElement.classList.add("dark");
         }

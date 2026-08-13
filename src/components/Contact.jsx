@@ -116,7 +116,7 @@ export default function Contact() {
                       href={social.href}
                       target={social.href.startsWith("http") ? "_blank" : undefined}
                       rel={social.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                      className="group flex items-center gap-2.5 text-sm font-medium text-slate-600 transition hover:text-cyan-600 dark:text-slate-400 dark:hover:text-cyan"
+                      className="group flex items-center gap-2.5 text-sm font-medium text-slate-600 transition hover:text-primary-600 dark:text-slate-400 dark:hover:text-primary"
                     >
                       <Icon size={17} className="transition-transform group-hover:-translate-y-0.5" />
                       {social.label}

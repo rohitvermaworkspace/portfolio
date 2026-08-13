@@ -29,30 +29,32 @@ export default function Process() {
           <Reveal delay={100}>
             <ol className="relative grid gap-10 md:grid-cols-6 md:gap-4">
               <div
-                className="absolute left-0 right-0 top-6 hidden h-px bg-gradient-to-r from-cyan-500/60 via-cyan-400/25 to-transparent md:block"
+                className="absolute left-0 right-0 top-6 hidden h-px bg-gradient-to-r from-primary-500/60 via-primary-400/25 to-transparent md:block"
                 aria-hidden="true"
               />
 
               {process.map(([num, title, text, iconKey], i) => {
                 const Icon = icons[iconKey];
                 return (
-                  <Reveal key={num} delay={i * 90}>
-                    <li className="relative flex flex-col items-center text-center md:items-start md:text-left">
-                      <div className="flex h-12 w-12 items-center justify-center rounded-full border border-cyan-300 bg-cyan-50 text-cyan-600 shadow-cyan dark:border-cyan/30 dark:bg-cyan/[0.05] dark:text-cyan dark:shadow-cyan">
-                        <Icon size={19} />
-                      </div>
+                  <li key={num}>
+                    <Reveal delay={i * 90}>
+                      <div className="flex flex-col items-center text-center md:items-start md:text-left">
+                        <div className="flex h-12 w-12 items-center justify-center rounded-full border border-primary-300 bg-primary-50 text-primary-600 shadow-glow-soft dark:border-primary/30 dark:bg-primary/[0.05] dark:text-primary dark:shadow-glow-soft">
+                          <Icon size={19} />
+                        </div>
 
-                      <div className="mt-4 text-[10px] font-bold uppercase tracking-[0.15em] text-cyan-600 dark:text-cyan">
-                        {num}
+                        <div className="mt-4 text-[10px] font-bold uppercase tracking-[0.15em] text-primary-600 dark:text-primary">
+                          {num}
+                        </div>
+                        <h3 className="mt-1 text-sm font-semibold text-slate-900 dark:text-white">
+                          {title}
+                        </h3>
+                        <p className="mt-2 text-[12px] leading-5 text-slate-600 dark:text-slate-400">
+                          {text}
+                        </p>
                       </div>
-                      <h3 className="mt-1 text-sm font-semibold text-slate-900 dark:text-white">
-                        {title}
-                      </h3>
-                      <p className="mt-2 text-[12px] leading-5 text-slate-600 dark:text-slate-400">
-                        {text}
-                      </p>
-                    </li>
-                  </Reveal>
+                    </Reveal>
+                  </li>
                 );
               })}
             </ol>

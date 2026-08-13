@@ -12,7 +12,7 @@ export default function Spotlight() {
     const handleMove = (event) => {
       if (frame) return;
       frame = requestAnimationFrame(() => {
-        el.style.background = `radial-gradient(600px at ${event.clientX}px ${event.clientY}px, rgba(34,211,238,0.055), transparent 65%)`;
+        el.style.background = `radial-gradient(600px at ${event.clientX}px ${event.clientY}px, rgb(var(--primary) / 0.055), transparent 65%)`;
         frame = 0;
       });
     };
