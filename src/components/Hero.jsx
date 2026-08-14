@@ -11,12 +11,24 @@ import {
   Sparkles,
 } from "lucide-react";
 import { profile } from "../data";
+import SkillIcon from "../lib/skillIcons";
 
 const roles = [
   "Frontend Developer",
   "UI Architect",
   "Design Systems Engineer",
   "Performance Optimization Specialist",
+];
+
+const orbitOuter = [
+  { name: "Angular", angle: 0 },
+  { name: "React", angle: 45 },
+  { name: "JavaScript", angle: 90 },
+  { name: "TypeScript", angle: 135 },
+  { name: "Node.js", angle: 180 },
+  { name: "HTML5", angle: 225 },
+  { name: "CSS3", angle: 270 },
+  { name: "Tailwind CSS", angle: 315 },
 ];
 
 const TYPE_SPEED = 90;
@@ -138,7 +150,36 @@ export default function Hero() {
           <div className="absolute left-1/2 top-[40%] h-72 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/20 blur-3xl dark:bg-primary/10" />
 
           {/* Large circle */}
-          <div className="absolute left-1/2 top-[40%] h-[340px] w-[340px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-primary-200 bg-[radial-gradient(circle_at_50%_35%,rgb(var(--primary)_/_0.25),rgba(255,255,255,0)_65%)] shadow-[0_0_80px_rgb(var(--primary)_/_0.10)] dark:border-primary/20 dark:bg-[radial-gradient(circle_at_50%_35%,rgb(var(--primary)_/_0.18),rgba(4,13,24,0)_65%)] dark:shadow-[0_0_80px_rgb(var(--primary)_/_0.08)]" />
+          <div className="absolute left-1/2 top-[40%] h-[300px] w-[300px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-primary-200 bg-[radial-gradient(circle_at_50%_35%,rgb(var(--primary)_/_0.25),rgba(255,255,255,0)_65%)] shadow-[0_0_80px_rgb(var(--primary)_/_0.10)] dark:border-primary/20 dark:bg-[radial-gradient(circle_at_50%_35%,rgb(var(--primary)_/_0.18),rgba(4,13,24,0)_65%)] dark:shadow-[0_0_80px_rgb(var(--primary)_/_0.08)]" />
+
+          {/* Skills Orbit */}
+          <div className="pointer-events-none absolute left-1/2 top-[40%] z-[1] h-[540px] w-[540px] -translate-x-1/2 -translate-y-1/2">
+            <div className="relative scale-[.7] sm:scale-100">
+              {/* Outer ring */}
+              <div className="relative h-[540px] w-[540px] animate-orbit-slow">
+                <div className="absolute inset-0 animate-ring-pulse rounded-full border border-primary/20 shadow-[0_0_45px_rgb(var(--primary)_/_0.10)] dark:border-primary/15" />
+
+                <div className="absolute inset-[46px] animate-ring-pulse rounded-full border border-dashed border-primary/15 [animation-delay:2.5s] dark:border-primary/10 sm:inset-[42px]" />
+
+                {orbitOuter.map((item) => (
+                  <div
+                    key={item.name}
+                    className="absolute left-1/2 top-1/2 h-0 w-0"
+                    style={{ transform: `rotate(${item.angle}deg) translateX(266px)` }}
+                  >
+                    <div className="animate-orbit-counter-slow h-0 w-0">
+                      <div
+                        className="flex h-9 w-9 items-center justify-center rounded-full border border-primary-200 bg-white/80 shadow-[0_0_14px_rgb(var(--primary)_/_0.2)] backdrop-blur-sm dark:border-primary/25 dark:bg-[#0a1524]/85 sm:h-11 sm:w-11"
+                        style={{ transform: `translate(-50%, -50%) rotate(${-item.angle}deg)` }}
+                      >
+                        <SkillIcon name={item.name} size={24} />
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
 
           {/* Inner circle */}
           <div className="absolute top-0 bottom-0 left-1/2 z-10 h-[390px] w-[270px] -translate-x-1/2 sm:h-[430px] sm:w-[430px]">
