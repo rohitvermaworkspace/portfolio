@@ -1,6 +1,7 @@
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import AboutSkills from "./components/AboutSkills";
+import Work from "./components/Work";
 import Projects from "./components/Projects";
 import Experience from "./components/Experience";
 import Process from "./components/Process";
@@ -19,6 +20,7 @@ export default function App() {
       <main className="relative z-10">
         <Hero />
         <AboutSkills />
+        <Work />
         <Projects />
         <Experience />
         <Process />

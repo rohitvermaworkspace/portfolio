@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import {
   ArrowRight,
   CheckCircle2,
@@ -11,7 +12,56 @@ import {
 } from "lucide-react";
 import { profile } from "../data";
 
+const roles = [
+  "Frontend Developer",
+  "UI Architect",
+  "Design Systems Engineer",
+  "Performance Optimization Specialist",
+];
+
+const TYPE_SPEED = 90;
+const DELETE_SPEED = 50;
+const PAUSE_DURATION = 2000;
+
 export default function Hero() {
+  const [reducedMotion] = useState(
+    () => window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  );
+  const [text, setText] = useState(() => (reducedMotion ? roles[0] : ""));
+  const [roleIndex, setRoleIndex] = useState(0);
+  const [deleting, setDeleting] = useState(false);
+
+  useEffect(() => {
+    if (reducedMotion) return undefined;
+
+    const current = roles[roleIndex];
+    let timer;
+
+    if (!deleting && text === current) {
+      timer = setTimeout(() => setDeleting(true), PAUSE_DURATION);
+    } else if (deleting && text === "") {
+      timer = setTimeout(() => {
+        setDeleting(false);
+        setRoleIndex((index) => (index + 1) % roles.length);
+      }, 300);
+    } else {
+      timer = setTimeout(
+        () => {
+          setText(
+            deleting
+              ? current.slice(0, text.length - 1)
+              : current.slice(0, text.length + 1)
+          );
+        },
+        deleting ? DELETE_SPEED : TYPE_SPEED
+      );
+    }
+
+    return () => clearTimeout(timer);
+  }, [text, deleting, roleIndex, reducedMotion]);
+
+  const firstName = profile.name.split(" ")[0];
+
   return (
     <section id="home" className="relative overflow-hidden pt-24 sm:pt-28">
       <div className="pointer-events-none absolute inset-0">
@@ -25,15 +75,32 @@ export default function Hero() {
         {/* LEFT CONTENT */}
         <div className="relative z-10">
           <div className="eyebrow">
-            <span className="h-2 w-2 rounded-full bg-primary shadow-[0_0_12px_3px_rgb(var(--primary)_/_0.45)]" />
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-primary shadow-[0_0_12px_3px_rgb(var(--primary)_/_0.45)]" />
+            </span>
             {profile.role}
           </div>
 
-          <h1 className="mt-6 max-w-[650px] text-[48px] font-extrabold leading-[.99] tracking-[-.045em] sm:text-[62px] lg:text-[66px] xl:text-[72px]">
+          <h1 className="mt-6 max-w-[650px] text-[48px] font-extrabold leading-[.99] tracking-[-0.045em] text-slate-900 sm:text-[62px] lg:text-[66px] xl:text-[72px] dark:text-white">
             I build digital <span className="gradient-text">experiences</span> that matter.
           </h1>
 
-          <p className="mt-6 max-w-[560px] text-[13px] leading-6 text-slate-600 sm:text-sm dark:text-slate-400">I'm {profile.name}, a Senior Frontend Developer with 10+ years of experience building scalable, beautiful and high-performance web applications.</p>
+          <p className="mt-6 text-[16px] font-semibold leading-6 text-slate-700 sm:text-[18px] dark:text-slate-200">
+            I'm {firstName} —{" "}
+            <span className="gradient-text font-bold">{text}</span>
+            <span
+              aria-hidden="true"
+              className="animate-cursor ml-1 inline-block text-primary-600 dark:text-primary"
+            >
+              |
+            </span>
+          </p>
+
+          <p className="mt-5 max-w-[560px] text-[13px] leading-6 text-slate-600 sm:text-sm dark:text-slate-400">
+            A Senior Frontend Developer with 10+ years of experience building
+            scalable, beautiful and high-performance web applications.
+          </p>
 
           <div className="mt-7 flex flex-wrap gap-3">
             <a href="#projects" className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-primary to-secondary-400 px-5 py-3 text-[12px] font-bold text-slate-950 shadow-[0_0_30px_rgb(var(--primary)_/_0.2)] transition hover:-translate-y-0.5">

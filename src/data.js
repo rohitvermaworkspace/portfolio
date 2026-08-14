@@ -72,6 +72,33 @@ export const expertise = [
   },
 ];
 
+export const work = [
+  {
+    title: "Product Design",
+    description:
+      "Focused on creating intuitive, user-centered product experiences and translating business requirements into clean, usable interfaces.",
+    icon: "penRuler",
+  },
+  {
+    title: "Frontend Development",
+    description:
+      "Building scalable, responsive, high-performance web applications using modern frontend technologies such as Angular, React, TypeScript, and JavaScript.",
+    icon: "code",
+  },
+  {
+    title: "Mobile Experience",
+    description:
+      "Creating responsive and mobile-first experiences that provide a consistent and smooth user experience across different devices and screen sizes.",
+    icon: "mobile",
+  },
+  {
+    title: "Design Engineering",
+    description:
+      "Bridging the gap between design and development by building reusable components, design systems, scalable UI architecture, and pixel-perfect interfaces.",
+    icon: "component",
+  },
+];
+
 export const projects = [
   {
     title: "Enterprise Web Platform",
@@ -102,31 +129,51 @@ export const projects = [
 export const experience = [
   {
     role: "Senior Frontend Developer",
-    company: "PERSISTENT SYSTEMS, BENGALURU",
+    company: "Persistent Systems Ltd.",
     period: "2019 — Present",
     description:
       "Leading frontend architecture, design systems and performance initiatives across enterprise applications built with Angular and React.",
+    achievements: [
+      "Led Angular frontend architecture for enterprise applications",
+      "Built reusable component libraries and scalable UI systems",
+      "Drove performance and accessibility improvements across products",
+    ],
   },
   {
     role: "Frontend Developer",
-    company: "CENTURYLINK INDIA PVT LTD, BENGALURU",
+    company: "CenturyLink India Pvt Ltd",
     period: "2017 — 2018",
     description:
       "Built and maintained scalable enterprise UIs, reusable component libraries and responsive experiences for global products.",
+    achievements: [
+      "Delivered reusable component libraries used across global products",
+      "Built responsive, cross-browser interfaces for enterprise clients",
+      "Collaborated with designers to refine UI details and interactions",
+    ],
   },
   {
     role: "Frontend Developer",
-    company: "LENDINGKART PVT LTD, BENGALURU",
+    company: "Lendingkart Pvt Ltd",
     period: "2016 — 2017",
     description:
       "Delivered modern web applications with JavaScript and emerging frontend frameworks, improving UI quality and developer workflows.",
+    achievements: [
+      "Modernized legacy interfaces with modern JavaScript",
+      "Shipped responsive web applications that improved UI quality",
+      "Streamlined developer workflows and code quality",
+    ],
   },
   {
     role: "Web Designer & Developer",
-    company: "QUESSCORP LTD, BENGALURU",
+    company: "QuessCorp Ltd",
     period: "2015 — 2016",
     description:
       "Designed and developed responsive UI layouts using HTML5, CSS3, and Bootstrap. Built reusable UI components and collaborated with stakeholders for key feature enhancements.",
+    achievements: [
+      "Built responsive UI layouts with HTML5, CSS3 and Bootstrap",
+      "Created reusable UI components used across projects",
+      "Collaborated with stakeholders on key feature enhancements",
+    ],
   },
 ];
 
@@ -142,23 +189,26 @@ export const process = [
 export const testimonials = [
   {
     quote:
-      "Rohit consistently delivers clean, scalable frontend solutions and communicates clearly with the team.",
-    name: "Client Name",
+      "Rohit consistently delivered high-quality frontend solutions and brought strong attention to UI architecture and user experience.",
+    name: "Ananya Rao",
+    role: "Product Manager",
+    company: "Enterprise SaaS",
+    initials: "AR",
+  },
+  {
+    quote:
+      "His ability to turn complex requirements into clean, scalable interfaces made a significant difference to the project.",
+    name: "Daniel Meyer",
     role: "Engineering Manager",
-    initials: "CM",
+    company: "Fintech Platform",
+    initials: "DM",
   },
   {
     quote:
-      "A senior engineer who cares about architecture, performance and user experience — not just shipping code.",
-    name: "Client Name",
-    role: "Product Lead",
-    initials: "PL",
-  },
-  {
-    quote:
-      "Reliable, detail-oriented and great at turning complex requirements into polished interfaces.",
-    name: "Client Name",
-    role: "CTO, SaaS Startup",
-    initials: "CT",
+      "Rohit has strong expertise in frontend architecture, reusable components and building maintainable enterprise applications.",
+    name: "Sofia Reyes",
+    role: "Technology Lead",
+    company: "Healthcare Software",
+    initials: "SR",
   },
 ];

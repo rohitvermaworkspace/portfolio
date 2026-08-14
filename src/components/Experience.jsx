@@ -1,9 +1,10 @@
+import { Briefcase } from "lucide-react";
 import { experience } from "../data";
 import Reveal from "./Reveal";
 
 export default function Experience() {
   return (
-    <section id="experience" className="relative py-0 lg:py-14">
+    <section id="experience" className="relative py-10 lg:py-14">
       <div className="container-page">
         <Reveal>
           <div className="max-w-2xl">
@@ -21,80 +22,58 @@ export default function Experience() {
         </Reveal>
 
         {/* Timeline */}
-        <div className="relative mt-16">
+        <div className="relative mt-14 lg:mt-16">
+          {/* Vertical line */}
+          <div className="absolute bottom-2 left-[7px] top-2 w-px bg-gradient-to-b from-primary/50 via-primary/20 to-transparent" />
 
-          {/* Central timeline */}
-          <div className="absolute left-4 top-0 bottom-0 hidden w-px bg-gradient-to-b from-primary/60 via-primary/20 to-transparent md:left-1/2 md:block md:-translate-x-1/2" />
-
-          <div className="space-y-10 md:space-y-0">
+          <div className="space-y-10 md:space-y-12">
             {experience.map((item, i) => (
-              <Reveal key={i} delay={i * 100}>
-                <div
-                  className={`relative flex flex-col md:min-h-[250px] md:flex-row ${
-                    i % 2 === 0
-                      ? "md:justify-start"
-                      : "md:justify-end"
-                  }`}
-                >
+              <div key={item.role} className="relative pl-10 sm:pl-12">
+                {/* Marker */}
+                <span className="absolute left-0 top-1.5 flex h-[15px] w-[15px] items-center justify-center">
+                  <span className="absolute inset-0 rounded-full bg-primary/25 shadow-[0_0_14px_rgb(var(--primary)_/_0.35)]" />
+                  <span className="absolute inset-[3px] rounded-full bg-primary shadow-[0_0_10px_rgb(var(--primary)_/_0.8)]" />
+                </span>
 
-                  {/* Timeline Node */}
-                  <div className="absolute left-[8px] top-8 z-20 hidden md:left-1/2 md:flex md:-translate-x-1/2">
-                    <span className="relative flex h-5 w-5 items-center justify-center">
-                      <span className="absolute inset-0 rounded-full bg-primary/20 shadow-[0_0_20px_rgb(var(--primary)_/_0.25)]" />
-                      <span className="relative h-2.5 w-2.5 rounded-full bg-primary shadow-[0_0_12px_rgb(var(--primary)_/_0.7)]" />
-                    </span>
-                  </div>
+                <Reveal delay={i * 80}>
+                  <div>
+                    {/* Role + Company */}
+                    <h3 className="text-lg font-bold leading-snug tracking-tight text-slate-900 sm:text-xl dark:text-white">
+                      {item.role}{" "}
+                      <span className="font-semibold text-primary-600 dark:text-primary">
+                        @ {item.company}
+                      </span>
+                    </h3>
 
-                  {/* Branch Line */}
-                  <div
-                    className={`absolute top-[42px] hidden h-px w-[8%] bg-gradient-to-r from-primary/40 to-transparent md:block ${
-                      i % 2 === 0
-                        ? "left-[42%]"
-                        : "right-[42%] rotate-180"
-                    }`}
-                  />
-
-                  {/* Experience Card */}
-                  <div
-                    className={`relative w-full md:w-[43%] ${
-                      i % 2 === 0
-                        ? "md:mr-auto"
-                        : "md:ml-auto"
-                    }`}
-                  >
-                    <div className="group relative rounded-2xl border border-slate-200 bg-white/70 p-6 shadow-[0_15px_45px_rgba(15,23,42,.06)] backdrop-blur-sm transition duration-300 hover:-translate-y-1 hover:border-primary-300 hover:shadow-[0_20px_50px_rgb(var(--primary)_/_0.10)] dark:border-white/10 dark:bg-white/[.025] dark:hover:border-primary/30">
-
-                      {/* Card glow */}
-                      <div className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/[.04] via-transparent to-transparent opacity-0 transition group-hover:opacity-100" />
-
-                      <div className="relative">
-
-                        {/* Period */}
-                        <div className="flex flex-wrap items-center gap-3">
-                          <span className="rounded-full border border-primary-200 bg-primary-50 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.15em] text-primary-700 dark:border-primary/20 dark:bg-primary/[.06] dark:text-primary">
-                            {item.period}
-                          </span>
-                        </div>
-
-                        {/* Role */}
-                        <h3 className="mt-4 text-xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-2xl">
-                          {item.role}
-                        </h3>
-
-                        {/* Company */}
-                        <div className="mt-1 text-sm font-semibold text-primary-600 dark:text-primary">
-                          {item.company}
-                        </div>
-
-                        {/* Description */}
-                        <p className="mt-4 text-[14px] leading-7 text-slate-600 dark:text-slate-400">
-                          {item.description}
-                        </p>
-                      </div>
+                    {/* Duration */}
+                    <div className="mt-2 flex items-center gap-2 text-[13px] font-medium text-slate-600 dark:text-slate-400">
+                      <Briefcase
+                        size={14}
+                        className="shrink-0 text-primary-600 dark:text-primary"
+                      />
+                      <span>{item.period}</span>
                     </div>
+
+                    {/* Description */}
+                    <p className="mt-3 max-w-4xl text-[13px] leading-7 text-slate-600 sm:text-sm dark:text-slate-400">
+                      {item.description}
+                    </p>
+
+                    {/* Achievements */}
+                    <ul className="mt-4 space-y-2">
+                      {item.achievements.map((achievement) => (
+                        <li
+                          key={achievement}
+                          className="flex max-w-2xl items-start gap-3 text-[13px] leading-6 text-slate-700 sm:text-sm dark:text-slate-300"
+                        >
+                          <span className="mt-[9px] h-1.5 w-1.5 shrink-0 rounded-full bg-primary-600 shadow-[0_0_8px_rgb(var(--primary)_/_0.7)] dark:bg-primary" />
+                          <span>{achievement}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-                </div>
-              </Reveal>
+                </Reveal>
+              </div>
             ))}
           </div>
         </div>
