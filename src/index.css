@@ -44,6 +44,10 @@ body {
 
 section { scroll-margin-top: 88px; }
 
+.safe-area-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
 /* smooth color transitions while switching themes */
 html.theme-transitioning,
 html.theme-transitioning *,

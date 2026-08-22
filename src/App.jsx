@@ -1,4 +1,5 @@
 import Navbar from "./components/Navbar";
+import MobileBottomNav from "./components/MobileBottomNav";
 import Hero from "./components/Hero";
 import AboutSkills from "./components/AboutSkills";
 import Work from "./components/Work";
@@ -17,7 +18,8 @@ export default function App() {
       <Backdrop />
       <Spotlight />
       <Navbar />
-      <main className="relative z-10">
+      <MobileBottomNav />
+      <main className="relative z-10 pb-24 md:pb-0">
         <Hero />
         <AboutSkills />
         <Work />
