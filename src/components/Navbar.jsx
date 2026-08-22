@@ -1,6 +1,5 @@
-import { Download, Moon, Sun } from "lucide-react";
+import { Download } from "lucide-react";
 import { profile } from "../data";
-import { useTheme } from "../lib/useTheme";
 import { useActiveSection } from "../lib/useActiveSection";
 import ThemeSwitcher from "./ThemeSwitcher";
 
@@ -16,7 +15,6 @@ const links = [
 const sectionIds = links.map(([, id]) => id);
 
 export default function Navbar() {
-  const { theme, toggleTheme } = useTheme();
   const active = useActiveSection(sectionIds);
 
   return (
@@ -62,13 +60,13 @@ export default function Navbar() {
 
           <ThemeSwitcher />
 
-          <button
+          {/* <button
             onClick={toggleTheme}
             aria-label="Toggle theme"
             className="rounded-xl border border-slate-200 bg-white/60 p-2.5 text-slate-600 transition hover:border-primary-400/50 hover:text-primary-600 dark:border-white/10 dark:bg-white/[0.03] dark:text-slate-300 dark:hover:text-primary"
           >
             {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
-          </button>
+          </button> */}
 
           <a
             href="#home"
