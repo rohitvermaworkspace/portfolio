@@ -1,9 +1,9 @@
 export default function Backdrop() {
   return (
     <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden" aria-hidden="true">
-      <div className="animate-aurora absolute -top-40 left-1/4 h-[480px] w-[480px] rounded-full bg-primary-500/15 blur-[120px] dark:bg-primary/10" />
-      <div className="animate-aurora absolute top-1/3 -right-32 h-[420px] w-[420px] rounded-full bg-tertiary-600/15 blur-[120px] [animation-delay:-6s] dark:bg-tertiary-600/10" />
-      <div className="animate-aurora absolute -bottom-40 left-10 h-[380px] w-[380px] rounded-full bg-secondary-500/10 blur-[120px] [animation-delay:-12s] dark:bg-secondary-500/[0.07]" />
+      <div className="animate-aurora absolute -top-40 left-1/4 h-[480px] w-[480px] rounded-full bg-primary-500/15 blur-[120px] dark:bg-primary/10" aria-hidden="true" />
+      <div className="animate-aurora absolute top-1/3 -right-32 h-[420px] w-[420px] rounded-full bg-tertiary-600/15 blur-[120px] [animation-delay:-6s] dark:bg-tertiary-600/10" aria-hidden="true" />
+      <div className="animate-aurora absolute -bottom-40 left-10 h-[380px] w-[380px] rounded-full bg-secondary-500/10 blur-[120px] [animation-delay:-12s] dark:bg-secondary-500/[0.07]" aria-hidden="true" />
     </div>
   );
 }

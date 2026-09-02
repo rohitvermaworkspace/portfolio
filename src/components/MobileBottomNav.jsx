@@ -100,7 +100,7 @@ export default function MobileBottomNav() {
                 className={`relative flex flex-1 flex-col items-center justify-center gap-1 transition-colors ${
                   isActive
                     ? "text-primary-600 dark:text-primary"
-                    : "text-slate-400 hover:text-slate-600 dark:text-slate-500 dark:hover:text-slate-300"
+                    : "text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200"
                 }`}
               >
                 <Icon
@@ -133,7 +133,7 @@ export default function MobileBottomNav() {
             className={`relative flex flex-1 flex-col items-center justify-center gap-1 transition-colors ${
               isMoreActive
                 ? "text-primary-600 dark:text-primary"
-                : "text-slate-400 hover:text-slate-600 dark:text-slate-500 dark:hover:text-slate-300"
+                : "text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200"
             }`}
           >
             <div className="relative">

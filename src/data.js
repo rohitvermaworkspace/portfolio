@@ -8,6 +8,8 @@ export const profile = {
   experience: "10+",
   github: "https://github.com/rohitvermaworkspace",
   linkedin: "https://www.linkedin.com/in/rohit-verma-3bb60052/",
+  whatsapp: "https://wa.me/919999999999",
+  phone: "tel:+919999999999",
 };
 
 export const about = [

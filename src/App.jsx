@@ -1,16 +1,20 @@
+import { lazy, Suspense } from "react";
 import Navbar from "./components/Navbar";
 import MobileBottomNav from "./components/MobileBottomNav";
 import Hero from "./components/Hero";
 import AboutSkills from "./components/AboutSkills";
-import Work from "./components/Work";
-import Projects from "./components/Projects";
-import Experience from "./components/Experience";
-import Process from "./components/Process";
-import Testimonials from "./components/Testimonials";
-import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import Backdrop from "./components/Backdrop";
 import Spotlight from "./components/Spotlight";
+import WhatsAppButton from "./components/WhatsAppButton";
+import PhoneButton from "./components/PhoneButton";
+
+const Work = lazy(() => import("./components/Work"));
+const Projects = lazy(() => import("./components/Projects"));
+const Experience = lazy(() => import("./components/Experience"));
+const Process = lazy(() => import("./components/Process"));
+const Testimonials = lazy(() => import("./components/Testimonials"));
+const Contact = lazy(() => import("./components/Contact"));
 
 export default function App() {
   return (
@@ -22,14 +26,18 @@ export default function App() {
       <main className="relative z-10 pb-24 md:pb-0">
         <Hero />
         <AboutSkills />
-        <Work />
-        <Projects />
-        <Experience />
-        <Process />
-        <Testimonials />
-        <Contact />
+        <Suspense>
+          <Work />
+          <Projects />
+          <Experience />
+          <Process />
+          <Testimonials />
+          <Contact />
+        </Suspense>
       </main>
       <Footer />
+      <WhatsAppButton />
+      <PhoneButton />
     </div>
   );
 }

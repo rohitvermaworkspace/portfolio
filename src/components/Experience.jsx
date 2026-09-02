@@ -28,7 +28,7 @@ export default function Experience() {
 
           <div className="space-y-10 md:space-y-12">
             {experience.map((item, i) => (
-              <div key={item.role} className="relative pl-10 sm:pl-12">
+              <div key={`${item.role}-${item.company}`} className="relative pl-10 sm:pl-12">
                 {/* Marker */}
                 <span className="absolute left-0 top-1.5 flex h-[15px] w-[15px] items-center justify-center">
                   <span className="absolute inset-0 rounded-full bg-primary/25 shadow-[0_0_14px_rgb(var(--primary)_/_0.35)]" />
